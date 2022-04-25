@@ -1,0 +1,201 @@
+<Shell
+    x:Class="MAUI_Demo_01.DesktopShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:MAUI_Demo_01.Pages"
+    xmlns:vm="clr-namespace:MAUI_Demo_01.ViewModels"
+    Title=""
+    BackgroundColor="{DynamicResource WhiteColor}"
+    FlyoutBackground="{DynamicResource Gray100Color}"
+    FlyoutBehavior="Locked"
+    FlyoutWidth="78"
+    Shell.BackgroundColor="{DynamicResource Blue600Color}"
+    Shell.NavBarHasShadow="True"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarBackgroundColor="{DynamicResource Blue500Color}"
+    Shell.TabBarForegroundColor="{DynamicResource WhiteColor}"
+    Shell.TabBarTitleColor="{DynamicResource Blue50Color}"
+    Shell.TabBarUnselectedColor="{DynamicResource Blue900Color}"
+    Shell.TitleColor="{DynamicResource WhiteColor}">
+
+    <Shell.BindingContext>
+        <vm:ShellViewModel />
+    </Shell.BindingContext>
+
+    <Shell.FlyoutHeader>
+        <Grid
+            x:Name="gridHeader"
+            Padding="20"
+            HeightRequest="140"
+            RowDefinitions="68,auto"
+            RowSpacing="10">
+            <Image HeightRequest="80" Source="dotnet_bot.png" />
+            <Label
+                Grid.Row="1"
+                FontSize="8"
+                HorizontalOptions="Center"
+                Text="MAUI App" />
+        </Grid>
+    </Shell.FlyoutHeader>
+
+    <!--  Anonymous group  -->
+    <FlyoutItem
+        x:Name="introduceTab"
+        FlyoutItemIsVisible="False"
+        Shell.FlyoutBehavior="Disabled"
+        Shell.NavBarIsVisible="False"
+        Shell.TabBarIsVisible="False">
+        <ShellContent
+            x:Name="shellIntroducing"
+            ContentTemplate="{DataTemplate local:Introducing}"
+            Route="Introducing" />
+    </FlyoutItem>
+    <FlyoutItem
+        x:Name="loginTab"
+        FlyoutItemIsVisible="False"
+        Shell.FlyoutBehavior="Disabled"
+        Shell.NavBarIsVisible="False"
+        Shell.TabBarIsVisible="False">
+        <ShellContent
+            x:Name="shellLogin"
+            ContentTemplate="{DataTemplate local:Login}"
+            Route="Login" />
+    </FlyoutItem>
+    <FlyoutItem
+        x:Name="registerTab"
+        FlyoutItemIsVisible="False"
+        Shell.FlyoutBehavior="Disabled"
+        Shell.NavBarIsVisible="False"
+        Shell.TabBarIsVisible="False">
+        <ShellContent
+            x:Name="shellRegister"
+            ContentTemplate="{DataTemplate local:Register}"
+            Route="Register" />
+        <ShellContent
+            x:Name="shellForgotPassword"
+            ContentTemplate="{DataTemplate local:ForgotPassword}"
+            Route="ForgotPassword" />
+    </FlyoutItem>
+
+    <!--  main group  -->
+    <FlyoutItem
+        Title="Home"
+        FlyoutIcon="home_icon.png"
+        Icon="home_icon.png">
+        <ShellContent
+            x:Name="shellHome"
+            Title="Home"
+            ContentTemplate="{DataTemplate local:MainPage}"
+            FlyoutIcon="home_icon.png"
+            Icon="home_icon.png"
+            Route="Home" />
+        <ShellContent
+            x:Name="shellDoc"
+            Title="Document"
+            ContentTemplate="{DataTemplate local:Document}"
+            FlyoutIcon="document_icon.png"
+            Icon="document_icon.png"
+            Route="Document" />
+        <ShellContent
+            x:Name="shellAbout"
+            Title="About"
+            ContentTemplate="{DataTemplate local:About}"
+            FlyoutIcon="account_icon.png"
+            Icon="account_icon.png"
+            Route="About" />
+    </FlyoutItem>
+
+    <FlyoutItem
+        Title="Chat"
+        FlyoutIcon="chat_icon.png"
+        Icon="chat_icon.png">
+        <ShellContent
+            x:Name="shellChat"
+            Title="Chat"
+            ContentTemplate="{DataTemplate local:Chat}"
+            FlyoutIcon="chat_icon.png"
+            Icon="chat_icon.png"
+            Route="Chat" />
+    </FlyoutItem>
+    <FlyoutItem
+        Title="Settings"
+        FlyoutIcon="setting_icon.png"
+        Icon="setting_icon.png">
+        <ShellContent
+            x:Name="shellSetting"
+            Title="Settings"
+            ContentTemplate="{DataTemplate local:Setting}"
+            FlyoutIcon="setting_icon.png"
+            Icon="setting_icon.png"
+            Route="Setting" />
+    </FlyoutItem>
+
+    <MenuItem
+        Command="{Binding GoToOfficialCommand}"
+        IconImageSource="support_icon.png"
+        Text="Help" />
+
+    <FlyoutItem
+        Title="Logout"
+        FlyoutDisplayOptions="AsSingleItem"
+        FlyoutIcon="logout_icon.png"
+        Icon="logout_icon.png">
+        <ShellContent
+            x:Name="shellLogout"
+            Title="Logout"
+            ContentTemplate="{DataTemplate local:Logout}"
+            FlyoutIcon="logout_icon.png"
+            Icon="logout_icon.png"
+            Route="Logout" />
+    </FlyoutItem>
+
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <Grid
+                Padding="0,8,0,8"
+                HeightRequest="64"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+                <Grid
+                    HorizontalOptions="FillAndExpand"
+                    RowDefinitions="*,auto"
+                    VerticalOptions="FillAndExpand">
+                    <Image
+                        Aspect="Center"
+                        HorizontalOptions="CenterAndExpand"
+                        Source="{Binding FlyoutIcon}"
+                        VerticalOptions="CenterAndExpand"
+                        WidthRequest="42" />
+                    <Label
+                        Grid.Row="1"
+                        FontSize="10"
+                        HorizontalOptions="CenterAndExpand"
+                        Text="{Binding Title}"
+                        VerticalOptions="CenterAndExpand" />
+                </Grid>
+            </Grid>
+        </DataTemplate>
+    </Shell.ItemTemplate>
+
+    <Shell.MenuItemTemplate>
+        <DataTemplate>
+            <Grid
+                Padding="0,8,0,8"
+                HorizontalOptions="FillAndExpand"
+                RowDefinitions="*,auto">
+                <Image
+                    Aspect="Center"
+                    HorizontalOptions="CenterAndExpand"
+                    MaximumWidthRequest="36"
+                    Source="{Binding Icon}"
+                    VerticalOptions="CenterAndExpand" />
+                <Label
+                    Grid.Row="1"
+                    FontSize="10"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="{Binding Text}"
+                    VerticalOptions="CenterAndExpand" />
+            </Grid>
+        </DataTemplate>
+    </Shell.MenuItemTemplate>
+</Shell>

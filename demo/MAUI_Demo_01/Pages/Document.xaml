@@ -1,0 +1,22 @@
+<ContentPage
+    x:Class="MAUI_Demo_01.Pages.Document"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Document"
+    Background="{DynamicResource WhiteColor}">
+    <StackLayout Margin="0,10,0,0">
+        <Button
+            Clicked="OnClicked"
+            Text="Select a File"
+            WidthRequest="160" />
+        <Label
+            x:Name="text"
+            HorizontalOptions="Center"
+            Text="" />
+        <Image
+            x:Name="image"
+            HeightRequest="400"
+            HorizontalOptions="Center"
+            WidthRequest="400" />
+    </StackLayout>
+</ContentPage>

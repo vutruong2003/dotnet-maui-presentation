@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MAUI_Demo_01.Pages.Swipering"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cvt="clr-namespace:MAUI_Demo_01.Converters"
+    xmlns:m="clr-namespace:MAUI_Demo_01.Models"
+    xmlns:vm="clr-namespace:MAUI_Demo_01.ViewModels"
+    Title="Swipering">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <cvt:InverseBoolConverter x:Key="inverseBool" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.BindingContext>
+        <vm:SwiperingViewModel />
+    </ContentPage.BindingContext>
+    <StackLayout
+        Margin="0,0,0,20"
+        HorizontalOptions="FillAndExpand"
+        VerticalOptions="FillAndExpand">
+        <Grid
+            ColumnDefinitions="*,320,*"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand">
+            <Grid
+                Grid.Column="0"
+                Background="White"
+                ZIndex="10" />
+            <Grid
+                Grid.Column="2"
+                Background="White"
+                ZIndex="10" />
+            <Grid
+                Grid.Column="1"
+                HorizontalOptions="CenterAndExpand"
+                MaximumHeightRequest="580"
+                MaximumWidthRequest="320"
+                VerticalOptions="FillAndExpand">
+                <StackLayout Padding="10">
+                    <CarouselView
+                        x:Name="slider"
+                        CurrentItemChangedCommand="{Binding SliderItemChangeCommand}"
+                        HorizontalScrollBarVisibility="Never"
+                        IndicatorView="indicatorView"
+                        ItemsSource="{Binding Items}"
+                        MaximumHeightRequest="550"
+                        VerticalScrollBarVisibility="Never">
+                        <CarouselView.ItemTemplate>
+                            <DataTemplate x:DataType="m:IntroducingItemModel">
+                                <StackLayout
+                                    Padding="10,10,10,30"
+                                    Background="White"
+                                    HorizontalOptions="FillAndExpand"
+                                    VerticalOptions="FillAndExpand"
+                                    ZIndex="{Binding Index}">
+                                    <Grid
+                                        HorizontalOptions="FillAndExpand"
+                                        RowDefinitions="*,120"
+                                        VerticalOptions="FillAndExpand"
+                                        ZIndex="1">
+                                        <Image
+                                            Aspect="AspectFit"
+                                            HorizontalOptions="CenterAndExpand"
+                                            MaximumHeightRequest="400"
+                                            MaximumWidthRequest="320"
+                                            SemanticProperties.Description="Scenarios Image"
+                                            Source="{Binding ImageUrl}" />
+                                        <StackLayout
+                                            Grid.Row="1"
+                                            HorizontalOptions="CenterAndExpand"
+                                            Spacing="10"
+                                            VerticalOptions="Start">
+                                            <Label
+                                                FontSize="Title"
+                                                HorizontalOptions="CenterAndExpand"
+                                                Text="{Binding Title}" />
+                                            <Label
+                                                Grid.Row="2"
+                                                FontSize="14"
+                                                HorizontalOptions="CenterAndExpand"
+                                                Text="{Binding Description}" />
+                                        </StackLayout>
+                                    </Grid>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CarouselView.ItemTemplate>
+                    </CarouselView>
+                    <IndicatorView
+                        x:Name="indicatorView"
+                        HorizontalOptions="Center"
+                        IndicatorColor="{DynamicResource Blue300Accent}"
+                        SelectedIndicatorColor="{DynamicResource Dark}" />
+                </StackLayout>
+            </Grid>
+        </Grid>
+        <Button
+            Command="{Binding MoveToNextItemCommand}"
+            HorizontalOptions="Center"
+            IsEnabled="{Binding IsNextButtonVisible, Converter={StaticResource inverseBool}}"
+            IsVisible="{Binding IsNextButtonVisible, Converter={StaticResource inverseBool}}"
+            MaximumWidthRequest="320"
+            MinimumWidthRequest="180"
+            Text="Next →" />
+        <Button
+            Command="{Binding GotoNextPageCommand}"
+            HorizontalOptions="Center"
+            IsEnabled="{Binding IsNextButtonVisible}"
+            IsVisible="{Binding IsNextButtonVisible}"
+            MaximumWidthRequest="320"
+            MinimumWidthRequest="180"
+            Text="Getting Started →" />
+    </StackLayout>
+</ContentPage>

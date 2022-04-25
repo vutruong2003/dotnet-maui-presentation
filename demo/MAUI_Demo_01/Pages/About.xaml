@@ -1,0 +1,166 @@
+<ContentPage
+    x:Class="MAUI_Demo_01.Pages.About"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:m="clr-namespace:MAUI_Demo_01.Models"
+    xmlns:vm="clr-namespace:MAUI_Demo_01.ViewModels"
+    Title="About"
+    Background="{DynamicResource WhiteColor}">
+    <ContentPage.BindingContext>
+        <vm:AboutViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Logout" Command="{Binding LogoutCommand}"/>
+    </ContentPage.ToolbarItems>
+
+    <ScrollView HorizontalScrollBarVisibility="Never" VerticalScrollBarVisibility="Never">
+
+        <Grid Padding="20,0" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+
+            <!--  Timeline  -->
+            <Frame
+                Grid.Row="0"
+                Margin="0,45,0,20"
+                Padding="0"
+                BorderColor="White"
+                CornerRadius="20"
+                HasShadow="False"
+                HeightRequest="160"
+                IsClippedToBounds="True"
+                VerticalOptions="Start">
+                <Image Aspect="AspectFit" Source="timeline.png" />
+            </Frame>
+
+            <!--  Image Profile  -->
+            <Frame
+                Grid.Row="1"
+                Margin="0,-90,0,0"
+                Padding="0"
+                BorderColor="White"
+                CornerRadius="55"
+                HasShadow="False"
+                HorizontalOptions="Center"
+                IsClippedToBounds="True"
+                WidthRequest="110">
+                <Image
+                    Aspect="AspectFit"
+                    HeightRequest="130"
+                    Source="myavatar.png"
+                    WidthRequest="130" />
+            </Frame>
+
+            <!--  Profile name & general description  -->
+            <Label
+                Grid.Row="2"
+                Margin="0,20,0,0"
+                FontAttributes="Bold"
+                FontSize="22"
+                HorizontalTextAlignment="Center"
+                Text="Vu Truong"
+                TextColor="#383b67" />
+
+            <Grid
+                Grid.Row="3"
+                Margin="0,20,0,0"
+                ColumnDefinitions="Auto,Auto,Auto,Auto,Auto"
+                ColumnSpacing="5"
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+                <ImageButton
+                    Grid.Column="0"
+                    CornerRadius="9"
+                    HeightRequest="20"
+                    HorizontalOptions="Center"
+                    Source="location_icon.png"
+                    WidthRequest="18" />
+                <Label
+                    Grid.Column="1"
+                    FontSize="15"
+                    Text="Ho Chi Minh City"
+                    TextColor="#9192b7">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoToMapCommand}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <ImageButton
+                    Grid.Column="2"
+                    Margin="10,0,0,0"
+                    CornerRadius="9"
+                    HeightRequest="20"
+                    HorizontalOptions="Center"
+                    Source="account_icon.png"
+                    WidthRequest="18" />
+                <Label
+                    Grid.Column="3"
+                    FontSize="15"
+                    Text=" Age, 28"
+                    TextColor="#9192b7" />
+            </Grid>
+
+            <Label
+                Grid.Row="4"
+                Margin="0,40,0,20"
+                FontAttributes="Bold"
+                FontSize="20"
+                HorizontalTextAlignment="Start"
+                Text="Note"
+                TextColor="#383b67" />
+
+            <Label
+                Grid.Row="5"
+                FontSize="15"
+                HorizontalTextAlignment="Start"
+                Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&#10;&#10;Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+                TextColor="#8d92b9" />
+
+            <!--  Works  -->
+            <Label
+                Grid.Row="6"
+                Margin="0,30,0,10"
+                FontAttributes="Bold"
+                FontSize="20"
+                HorizontalTextAlignment="Start"
+                Text="Works"
+                TextColor="#383b67" />
+            <CollectionView
+                Grid.Row="7"
+                Margin="0,0,-10,0"
+                HeightRequest="140"
+                HorizontalScrollBarVisibility="Never"
+                ItemsLayout="HorizontalList"
+                ItemsSource="{Binding Items}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="m:WorkItemModel">
+                        <StackLayout Margin="10,0,0,0" Padding="0,0,15,0">
+                            <Frame
+                                BorderColor="#c6c1ea"
+                                CornerRadius="13"
+                                HasShadow="False"
+                                HorizontalOptions="StartAndExpand"
+                                VerticalOptions="StartAndExpand">
+                                <Grid
+                                    HorizontalOptions="FillAndExpand"
+                                    RowDefinitions="40,Auto"
+                                    WidthRequest="120">
+                                    <Image
+                                        Grid.Row="0"
+                                        HeightRequest="40"
+                                        HorizontalOptions="Center"
+                                        Source="document_icon.png"
+                                        WidthRequest="40" />
+                                    <Label
+                                        Grid.Row="1"
+                                        FontSize="11"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding Name}"
+                                        TextColor="{DynamicResource PrimaryColor}" />
+                                </Grid>
+                            </Frame>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </ScrollView>
+</ContentPage>

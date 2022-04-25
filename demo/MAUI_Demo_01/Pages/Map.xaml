@@ -1,0 +1,20 @@
+<ContentPage
+    x:Class="MAUI_Demo_01.Pages.Map"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Map">
+    <StackLayout
+        HorizontalOptions="FillAndExpand"
+        Spacing="10"
+        VerticalOptions="FillAndExpand">
+        <WebView
+            HorizontalOptions="FillAndExpand"
+            Source="https://www.google.com/maps/place/2+Nguy%E1%BB%85n+Th%E1%BA%BF+L%E1%BB%99c,+Ph%C6%B0%E1%BB%9Dng+12,+T%C3%A2n+B%C3%ACnh,+Th%C3%A0nh+ph%E1%BB%91+H%E1%BB%93+Ch%C3%AD+Minh,+Vietnam/@10.7990249,106.6478039,17z/data=!3m1!4b1!4m5!3m4!1s0x31752949a1383501:0xa7c9aeb9482e8dc7!8m2!3d10.7990196!4d106.6499926"
+            VerticalOptions="FillAndExpand" />
+
+        <Button
+            Clicked="Button_Clicked"
+            Text="Back"
+            WidthRequest="120" />
+    </StackLayout>
+</ContentPage>
